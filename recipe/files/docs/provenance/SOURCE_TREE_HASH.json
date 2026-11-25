@@ -1,0 +1,9 @@
+{
+  "schema": "kitforge.source_tree_hash.v1",
+  "slug": "kubevip",
+  "repo": "https://github.com/kube-vip/kube-vip",
+  "ref": "v1.3.2",
+  "commit": "af00db1f742b88475d1f145ba226c6cd025d2895",
+  "tree_listing_sha256": "f2f210a18b5c18dd910d4e4dfe71f9843501b61f60a45e858db453affe58dac3",
+  "file_count": 318
+}

@@ -1,0 +1,73 @@
+{
+  "apt_refresh": [],
+  "binaries_from_component_images": [],
+  "binaries_from_source": [
+    {
+      "build_flags": [
+        "-trimpath"
+      ],
+      "build_tags": [],
+      "cgo_enabled": 0,
+      "ldflags": "-s -w -X=main.Version=@VERSION@ -X=main.Build=@COMMIT@ -extldflags -static",
+      "main_pkg": ".",
+      "name": "kube-vip",
+      "out_path": "/kube-vip",
+      "verify_contains": "@VERSION@",
+      "verify_subcmd": "version"
+    }
+  ],
+  "build_method": "source-rebuild-go",
+  "chain_id": 1182,
+  "dep_bumps": [
+    {
+      "module": "golang.org/x/net",
+      "to": "v0.62.0",
+      "why": "GO-2026-6860, GO-2026-6866: golang.org/x/net v0.60.0 -> 0.62.0"
+    }
+  ],
+  "expected_residuals": [],
+  "images": [
+    {
+      "digest": "sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea",
+      "ref": "golang:1.27.4-bookworm",
+      "role": "builder"
+    },
+    {
+      "digest": "sha256:4fa7c968ba93f1635670522dbb01a2c78150443e1385746924566079f36570ea",
+      "ref": "golang:1.27.4-bookworm",
+      "role": "offline_builder"
+    },
+    {
+      "digest": "sha256:9c7f200c07e3d4a03e7249d2c16bf66a51120fb876aa2242cf31451412543289",
+      "ref": "ubuntu:24.04",
+      "role": "base"
+    }
+  ],
+  "mod_replaces": [],
+  "runtime_base": {
+    "kind": "chisel",
+    "shell": true
+  },
+  "schema": "kitforge.toolchain_lock.v1",
+  "slug": "kubevip",
+  "source": {
+    "build_env": {
+      "CGO_ENABLED": "0",
+      "GOARCH": "amd64",
+      "GOFLAGS": "-buildvcs=false",
+      "GOOS": "linux",
+      "GOTOOLCHAIN": "local"
+    },
+    "builder_image": "golang:1.27.4-bookworm",
+    "commit": "af00db1f742b88475d1f145ba226c6cd025d2895",
+    "commit_epoch": 1795177128,
+    "go_module_root": "github.com/kube-vip/kube-vip",
+    "go_version_required": "1.27.2",
+    "ref": "v1.3.2",
+    "repo": "https://github.com/kube-vip/kube-vip",
+    "source_date_epoch": 1795200741,
+    "source_date_epoch_basis": "release-cut",
+    "source_date_epoch_provenance": "the time release v1.3.2-CE-ubuntu24.04-r1 was cut (2026-11-20T18:52:21Z), by scripts/retarget.py: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit af00db1f742b, dated 2026-11-20T12:18:48Z (source.commit_epoch)."
+  },
+  "version": "v1.3.2"
+}

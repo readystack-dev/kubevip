@@ -1,0 +1,58 @@
+{
+  "schema": "kitforge.build_recipe.v1",
+  "slug": "kubevip",
+  "image": "readystack/kubevip:v1.3.2-CE-ubuntu24.04-r1",
+  "build_method": "source-rebuild-go",
+  "source": {
+    "repo": "https://github.com/kube-vip/kube-vip",
+    "ref": "v1.3.2",
+    "commit": "af00db1f742b88475d1f145ba226c6cd025d2895",
+    "builder_image": "golang:1.27.4-bookworm",
+    "go_module_root": "github.com/kube-vip/kube-vip",
+    "go_version_required": "1.27.2",
+    "source_date_epoch": 1795200741,
+    "source_date_epoch_provenance": "the time release v1.3.2-CE-ubuntu24.04-r1 was cut (2026-11-20T18:52:21Z), by scripts/retarget.py: ReadyStack dates an image by when its release was packaged (owner 2026-11-10), recorded here once and used by every rebuild of the release; it builds upstream commit af00db1f742b, dated 2026-11-20T12:18:48Z (source.commit_epoch).",
+    "build_env": {
+      "CGO_ENABLED": "0",
+      "GOOS": "linux",
+      "GOARCH": "amd64",
+      "GOTOOLCHAIN": "local",
+      "GOFLAGS": "-buildvcs=false"
+    },
+    "_toolchain_note": "Go 1.27.3, upstream's own line (stack owner 2026-10-28): go.mod at v1.3.1 says `go 1.27.2` (upstream's Dockerfile builds with golang:1.27.2-alpine3.23), so this is the one stack component not on the stack's Go 1.26.10. The go directive stays exactly as upstream wrote it: it also sets the module's GODEBUG defaults, so lowering it would change runtime behaviour against upstream's binary. golang:1.27.3-bookworm is the 1.27 line's latest patch, the twin of 1.26.10 (BASE_IMAGE_DIGESTS.lock).",
+    "source_date_epoch_basis": "release-cut",
+    "commit_epoch": 1795177128
+  },
+  "binaries_from_source": [
+    {
+      "name": "kube-vip",
+      "main_pkg": ".",
+      "cgo_enabled": 0,
+      "build_tags": [],
+      "build_flags": [
+        "-trimpath"
+      ],
+      "ldflags": "-s -w -X=main.Version=@VERSION@ -X=main.Build=@COMMIT@ -extldflags -static",
+      "out_path": "/kube-vip",
+      "verify_subcmd": "version",
+      "verify_contains": "@VERSION@",
+      "_note": "Upstream Makefile: LDFLAGS=-ldflags \"-s -w -X=main.Version=$(VERSION) -X=main.Build=$(BUILD) -extldflags -static\" with VERSION := v1.3.1 and BUILD = `git rev-parse HEAD` (the full commit), `go build $(LDFLAGS) -o kube-vip` from the repo root, CGO_ENABLED=0 GOOS=linux (Dockerfile). `kube-vip version` prints `Version:  v1.3.1` and `Build:    <commit>`. Upstream's image puts the binary at /kube-vip and its ENTRYPOINT is [\"/kube-vip\"]; the generated pod manifest passes args [\"manager\"]."
+    }
+  ],
+  "runtime_packages": [
+    "base-files",
+    "base-passwd",
+    "ca-certificates",
+    "coreutils",
+    "dash",
+    "libc6",
+    "libssl3t64",
+    "openssl",
+    "tzdata"
+  ],
+  "runtime_base": {
+    "kind": "chisel",
+    "shell": true,
+    "packages": "vendored/chisel/packages.tsv"
+  }
+}

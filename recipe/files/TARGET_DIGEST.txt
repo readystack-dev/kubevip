@@ -1,0 +1,10 @@
+image_manifest_digest=sha256:fc454604272bb489e4141d002825afcdbf4a43308a2767ec00be3c8a883667d6
+config_digest=sha256:fc018adb49c0faf603bf505fe8fb4ce8b1b0a0ab9abc81e18bb9418b1cffae7c
+tag=readystack/kubevip:v1.3.2-CE-ubuntu24.04-r1
+probe_port=80
+probe_path=/
+probe_timeout=180
+probe_exec=/kube-vip version
+verify_boot=oneshot
+verify_oneshot_arg=version
+verify_oneshot_expect=Version:  v1.3.2
